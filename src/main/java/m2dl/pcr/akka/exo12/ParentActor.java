@@ -1,30 +1,30 @@
-package m2dl.pcr.akka.helloworld3;
+package m2dl.pcr.akka.exo12;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import akka.japi.Procedure;
 
+/**
+ * Created by MarS on 19/05/2017.
+ */
+public class ParentActor extends UntypedActor {
 
-public class HelloGoodbyeActor extends UntypedActor {
-    LoggingAdapter log = Logging.getLogger(getContext().system(), this);
+    private ActorRef goodByeActor;
+    private ActorRef helloActor;
 
-    public HelloGoodbyeActor() {
-
-        log.info("HelloGoodbyeActor constructor");
+    public ParentActor(){
+        //Create actors
+        goodByeActor = getContext().actorOf(Props.create(GoodByeMsgActor.class), "good-bye-actor");
+        helloActor = getContext().actorOf(Props.create(HelloMsgActor.class), "hello-actor");
     }
 
-    /*
-     Que représentent les objets "hello" et "goodbye" ?
-     Les deux comportement de l'acteur.
-     */
     Procedure<Object> hello = new Procedure<Object>() {
 
         public void apply(Object msg) throws Exception {
             if (msg instanceof String) {
-                log.info("Hello " + msg + "!");
+                helloActor.tell(msg,null);
                 getContext().become(goodbye,false);
-
             } else {
                 unhandled(msg);
             }
@@ -37,19 +37,15 @@ public class HelloGoodbyeActor extends UntypedActor {
     Procedure<Object> goodbye = new Procedure<Object>() {
         public void apply(Object msg) throws Exception {
             if (msg instanceof String) {
-                log.info("Good bye " + msg + "!");
-                getContext().unbecome();
-               //getContext().become(hello,false);
+               goodByeActor.tell(msg,null);
+                getContext().become(hello,false);
             } else {
                 unhandled(msg);
             }
         }
     };
 
-    @Override
     public void onReceive(Object msg) throws Exception {
         hello.apply(msg);
     }
-
-
 }

@@ -10,6 +10,10 @@ import org.slf4j.LoggerFactory;
 /**
  * Main runtime class.
  */
+/*
+ *Comment expliquer le comportement du système observé ? Les opération de logging sont asynchrone
+ * ce qui explique les message ne s'affiche pas dans le bon ordre
+ */
 public class System {
 
     public static final Logger log = LoggerFactory.getLogger(System.class);
@@ -30,7 +34,7 @@ public class System {
 
         Thread.sleep(1000);
 
-        log.debug("Actor System Shutdown Starting...");
+        log.debug("ActorLast System Shutdown Starting...");
 
         actorSystem.terminate();
     }

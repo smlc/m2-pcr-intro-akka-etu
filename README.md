@@ -19,7 +19,9 @@
     - que représentent les objets "hello" et "goodbye" ?
     - que permet de faire l'exécution de "getContext().unbecome()" ?
     - que signifie l'utilisation du deuxième paramètre de l'appel à "become" dans la définition de l'objet "hello" ?
-
+        http://doc.akka.io/api/akka/2.0/akka/actor/UntypedActorContext.html
+        Elle permet de garder ou non l'ancien l'ancien comportement dans le context. A false le comportement est gardé.
+                 
 #### Exercice 1.2
 
 Dans un nouveau package, implémentez un système à 3 acteurs. L'acteur parent, lorsqu'il reçoit un message *msg*

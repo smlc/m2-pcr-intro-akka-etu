@@ -13,19 +13,23 @@
     </properties>
 
     <dependencies>
+
         <dependency>
+            <!--Dependency for ActorLast model, writing concurrent and distributed systems -->
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-actor_2.11</artifactId>
             <version>${akka.version}</version>
         </dependency>
 
         <dependency>
+            <!--Logging -->
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-slf4j_2.11</artifactId>
             <version>${akka.version}</version>
         </dependency>
 
         <dependency>
+            <!--Non-blocking logger-->
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.1.3</version>

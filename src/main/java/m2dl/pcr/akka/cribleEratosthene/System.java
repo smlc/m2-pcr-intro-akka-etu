@@ -1,4 +1,4 @@
-package m2dl.pcr.akka.helloworld1;
+package m2dl.pcr.akka.cribleEratosthene;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * Main runtime class.
  */
 public class System {
-
+    public static final Integer N = 20;
     public static final Logger log = LoggerFactory.getLogger(System.class);
 
     public static void main(String... args) throws Exception {
@@ -20,15 +20,14 @@ public class System {
 
         Thread.sleep(5000);
 
-        final ActorRef actorRef = actorSystem.actorOf(Props.create(SimpleHelloWorldActor.class), "simple-hello-world-actor");
+        final ActorRef actorRef = actorSystem.actorOf(Props.create(ActorLast.class,2), "parent-actor");
 
-        actorRef.tell("John",null);
-        actorRef.tell("Pauline",null);
-        actorRef.tell("Eva",null);
-        actorRef.tell("Bill",null);
-        actorRef.tell("Marc",null);
 
-        Thread.sleep(3000);
+        for (int i = 3 ; i<50 ;i++){
+            actorRef.tell(i,null);
+        }
+
+         Thread.sleep(1000);
 
         log.debug("ActorLast System Shutdown Starting...");
 

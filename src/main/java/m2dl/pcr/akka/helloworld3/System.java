@@ -31,7 +31,7 @@ public class System {
 
         Thread.sleep(1000);
 
-        log.debug("Actor System Shutdown Starting...");
+        log.debug("ActorLast System Shutdown Starting...");
 
         actorSystem.terminate();
     }
